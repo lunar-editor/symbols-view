@@ -358,14 +358,17 @@ describe('SymbolsView', () => {
       expect(symbolsView.element.querySelector('li:first-child .secondary-line')).toHaveText(taggedFile);
       expect(symbolsView.element.querySelector('li:last-child .primary-line')).toHaveText('thisIsCrazy');
       expect(symbolsView.element.querySelector('li:last-child .secondary-line')).toHaveText(taggedFile);
+
       atom.commands.dispatch(getWorkspaceView(), 'symbols-view:toggle-project-symbols');
       fs.removeSync(directory.resolve('tags'));
 
       await conditionPromise(() => symbolsView.reloadTags);
       atom.commands.dispatch(getWorkspaceView(), 'symbols-view:toggle-project-symbols');
 
-      await conditionPromise(() => symbolsView.selectListView.refs.loadingMessage);
-      await conditionPromise(() => symbolsView.element.querySelectorAll('li').length === 0);
+      await conditionPromise(() => symbolsView.element.querySelectorAll('li').length < 4);
+      expect(symbolsView.selectListView.refs.loadingMessage).toBeUndefined();
+      expect(document.body.contains(symbolsView.element)).toBe(true);
+      expect(symbolsView.element.querySelectorAll('li').length).toBe(0);
     });
 
     describe('when there is only one project', () => {
