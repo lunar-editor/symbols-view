@@ -1,5 +1,7 @@
 # Symbols View package
 
+[![CI](https://github.com/lunar-editor/symbols-view/actions/workflows/ci.yml/badge.svg)](https://github.com/lunar-editor/symbols-view/actions/workflows/ci.yml)
+
 Display the list of functions/methods in the editor. If your project has a `tags`/`.tags`/`TAGS`/`.TAGS` file at the root then following are supported:
 
 |Command|Description|Keybinding (Linux)|Keybinding (macOS)|Keybinding (Windows)|
